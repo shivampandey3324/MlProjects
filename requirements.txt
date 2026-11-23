@@ -3,4 +3,6 @@ numpy
 seaborn
 ipykernel
 scikit-learn
+pipeline
+dill
 -e .

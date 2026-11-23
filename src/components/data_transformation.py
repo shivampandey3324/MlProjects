@@ -38,7 +38,7 @@ class DataTransfomation:
                 steps=[
                     ("imputer",SimpleImputer(strategy="most_frequent")),
                     ('one_hot_encoder',OneHotEncoder()),
-                    ("standardscaler",StandardScaler())
+                    ("standardscaler",StandardScaler(with_mean=False))
                 ]
             )
             logging.info(f"Categorical Columns:{cat_features}")
@@ -65,10 +65,10 @@ class DataTransfomation:
 
             target_col=['math_score']
 
-            input_featuire_train_df=train_df.drop(columns=[target_col],axis=1)
+            input_featuire_train_df=train_df.drop(columns=target_col)
             target_feature_train_df=train_df[target_col]
 
-            input_featuire_test_df=test_df.drop(columns=[target_col],axis=1)
+            input_featuire_test_df=test_df.drop(columns=target_col)
             target_feature_test_df=test_df[target_col]
 
             logging.info("Applying the preprocessing")
@@ -76,8 +76,8 @@ class DataTransfomation:
             input_feature_train_arr=preprocessing_obj.fit_transform(input_featuire_train_df)
             input_feature_test_arr=preprocessing_obj.transform(input_featuire_test_df)
 
-            train_arr=np.c_(input_feature_train_arr,np.array(target_feature_train_df))
-            test_arr=np.c_(input_feature_test_arr,np.array(target_feature_test_df))
+            train_arr=np.c_[input_feature_train_arr,np.array(target_feature_train_df)]
+            test_arr=np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
 
             logging.info("Saved processing info")
 

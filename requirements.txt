@@ -5,4 +5,7 @@ ipykernel
 scikit-learn
 pipeline
 dill
+catboost
+xgboost
+dataclasses
 -e .

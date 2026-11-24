@@ -7,6 +7,8 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.components.data_transformation import DataTransfomation
 from src.components.data_transformation import DataTransfomationConfig
+from src.components.model_trainer import ModelTrainer
+from src.components.model_trainer import ModelTrainerConfig
 
 @dataclass
 class DataIngestionConfig:
@@ -20,7 +22,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Data ingestion method entered")
         try:
-            df=pd.read_csv('notebook\data\stud.csv')
+            df=pd.read_csv('notebook/data/stud.csv')
             logging.info("Dataset read completed")
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
@@ -47,4 +49,9 @@ if __name__=="__main__":
     train_data,test_data=obj.initiate_data_ingestion()
 
     datatransformation=DataTransfomation()
-    datatransformation.initiate_data_transform(train_data,test_data)
+    train_arr,test_arr,preprocessor_path=datatransformation.initiate_data_transform(train_data,test_data)
+
+    modeltrainer=ModelTrainer()
+    result,name=modeltrainer.initiate_model_trainer(train_arr,test_arr,preprocessor_path)
+    print("Result:",result)
+    print("best Model Name:",name)

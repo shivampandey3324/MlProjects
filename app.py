@@ -11,7 +11,7 @@ app=application
 
 @app.route('/')
 def index():
-    return redirect('home.html')
+    return redirect('/predictdata')
 
 @app.route('/predictdata',methods=["GET","POST"])
 def predict_datapoint():

@@ -8,4 +8,5 @@ dill
 catboost
 xgboost
 dataclasses
+flask
 -e .

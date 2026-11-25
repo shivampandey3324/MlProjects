@@ -9,4 +9,5 @@ catboost
 xgboost
 dataclasses
 flask
+gunicorn
 -e .

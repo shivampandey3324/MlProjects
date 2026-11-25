@@ -8,12 +8,29 @@ class PredictPipeline:
         pass
     def predict(self,features):
         try:
+            print("STEP 1")
+
             model_path='artifacts/model.pkl'
             preprocessor_path='artifacts/preprocessor.pkl'
+
+            print("STEP 2")
+
             model=load_object(file_path=model_path)
+
+            print("STEP 3")
+
             preprocessor=load_object(file_path=preprocessor_path)
+
+            print("STEP 4")
+
             scaled_data=preprocessor.transform(features)
+
+            print("STEP 5")
+
             preds=model.predict(scaled_data)
+
+            print("STEP 6")
+
             return preds
         except Exception as e:
             raise CustomException(e,sys)
